@@ -16,10 +16,12 @@ html {
 
   @include breakpoint($large) {
     font-size: 16px;
+    font-color: #003399;
   }
 
   @include breakpoint($x-large) {
     font-size: 18px;
+    font-color: #003399;
   }
 
   -webkit-text-size-adjust: 100%;
