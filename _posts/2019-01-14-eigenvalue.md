@@ -1,3 +1,11 @@
+---
+tags:
+  - 고유값
+  - 고유벡터
+
+categories: 
+  - category LinearAlgebra
+---
 
 # 고유값, 고유벡터
 
