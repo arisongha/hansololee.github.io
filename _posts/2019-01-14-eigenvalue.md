@@ -13,7 +13,7 @@ $$Av - \lambda v = (A - \lambda I) v = 0$$
 
 $$\det \left( A - \lambda I \right) = 0$$
 
-예를 들어 행렬 $A$,
+예를 들어 행렬 $$A$$,
 
 $$ A=
 \begin{bmatrix}
