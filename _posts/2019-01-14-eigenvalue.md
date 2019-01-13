@@ -68,7 +68,7 @@ v_2
 0
 \end{bmatrix}$$
 
-이므로 고유벡터 $v$는
+이므로 고유벡터 $$v$$는
 $$v =
 \begin{bmatrix}
 5  \\
