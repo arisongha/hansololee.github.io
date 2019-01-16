@@ -5,7 +5,7 @@ tags:
   - 고유벡터
 
 categories: 
-  - LinearAlgebra
+  - Linear Algebra
 ---
 
 - 제목에 * 표시가 있는 것은 추가할 내용이 있거나 수정할 내용이 있다는 표시입니다.
