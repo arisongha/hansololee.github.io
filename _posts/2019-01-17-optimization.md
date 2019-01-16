@@ -31,7 +31,8 @@ $$x^{\ast} = \arg \min_x f(x) \;\;(\text{최소화의 경우})$$
 최적화 문제를 푸는 기본적인 원리는 생각보다 단순합니다. 최적화 문제에 직면한 함수의 현재 위치에서 함수값이 감소(최소화일 경우)하는 방향으로 조금씩 파라미터 값을 이동해 나가는 것입니다. 미리 정해놓은 거리만큼 이동하고 나서 다시 그 위치에서 어느 방향이 가장 내리막 길인지(최소점에 빠르게 다가갈수 있는길) 확인한 후, 다시 그 방향으로 이동하는 과정을 반복하여 더 이상 내려갈 수 없는 곳(local mimimum)에 다다를 때까지 반복해서 함수값이 최소화되는 지점을 발견할 수 있다는 원리입니다.
 
 <br/>
-<center><img data-action="zoom" src='{{ "/assets/img/gradientdescent.jpg" | relative_url }}' alt='absolute'></center>
+<center><img data-action="zoom" src='{{ "/assets/img/gradient_descent.png" | relative_url }}' alt='absolute'></center>
+<center><a href="https://codesachin.wordpress.com/tag/gradient-descent/">출처</a></center>
 <br/>
 
 ## 그리드 서치(grid search)
