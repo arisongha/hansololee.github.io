@@ -1,4 +1,4 @@
 ---
 layout: category
-title: Linear Algebra
+title: LinearAlgebra
 ---
