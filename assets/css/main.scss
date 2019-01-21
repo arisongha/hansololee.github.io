@@ -1,8 +1,30 @@
 ---
 # Only the main Sass file needs front matter (the dashes are enough)
+
 ---
 
 @charset "utf-8";
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+// @import "minimal-mistakes/skins/default"; // skin
+// @import "minimal-mistakes"; // main partials
+
+// Page의 padding을 0으로 바꿈
+.page {
+	padding-right: 0px !important;
+} 
+
+// font-size change
+.page__content {
+	font-size: 16px;
+}
+
+// ---
+// # Only the main Sass file needs front matter (the dashes are enough)
+// ---
+
+// @charset "utf-8";
+
+// @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
+// @import "minimal-mistakes"; // main partials
