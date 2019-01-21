@@ -146,3 +146,63 @@ $$\frac { \partial y }{ \partial x } =1\quad (x>0)\\ \frac { \partial y }{ \part
 <br/>
 <center><img data-action="zoom" src='{{ "/assets/img/propagation_04.png" | relative_url }}' alt='absolute'></center>
 <br/>
+
+### Sigmoid 노드
+
+**시그모이드(sigmoid)** 함수는 아래와 같이 정의됩니다.
+
+$$y=\frac { 1 }{ 1+exp(-x) }$$
+
+시그모이드 노드의 로컬 그래디언트는 다음과 같습니다.
+
+$$\frac { \partial y }{ \partial x } =y(1-y)$$
+
+계산그래프는 아래와 같습니다.
+
+<br/>
+<center><img data-action="zoom" src='{{ "/assets/img/propagation_05.png" | relative_url }}' alt='absolute'></center>
+<br/>
+
+### 하이퍼볼릭탄젠트 노드
+
+하이퍼볼릭탄젠트 노드 $$y=tanh(x)$$의 로컬 그래디언트는 다음과 같습니다.
+
+$$\frac { \partial y }{ \partial x } =1-{ y }^{ 2 }$$
+
+계산그래프는 아래와 같습니다.
+
+<br/>
+<center><img data-action="zoom" src='{{ "/assets/img/propagation_06.png" | relative_url }}' alt='absolute'></center>
+<br/>
+
+### Hadamard product 노드
+
+**Hadamard product**란 요소별 곱셈을 뜻합니다. 기호로는 ⊙ 등을 씁니다. 예컨대 아래와 같습니다.
+
+$$\begin{bmatrix} 1 \\ 3 \\ 2 \end{bmatrix}\odot \begin{bmatrix} 4 \\ 5 \\ 3 \end{bmatrix}=\begin{bmatrix} 4 \\ 15 \\ 6 \end{bmatrix}$$
+
+두 벡터에 Hadamard product 연산을 적용했을 때, 그 로컬 그래디언트는 아래와 같습니다.
+
+<br/>
+<center><img data-action="zoom" src='{{ "/assets/img/propagation_07.png" | relative_url }}' alt='absolute'></center>
+<br/>
+
+Hadamard product 노드 또한 다른 노드와 마찬가지로 위 로컬 그래디언트에 흘러들어온 그래디언트를 내적(inner product)해서 현시점의 그래디언트를 계산합니다. 그런데 흘러들어온 그래디언트 또한 벡터일 경우 Hadamard product 노드 로컬 그래디언트의 대각성분(위 그림에서 $$h_{t-1}^1,…,h_{t-1}^n$$)과 요소별 곱셈을 하여도 같은 결과가 나옵니다.
+
+### Softmax-with-Loss 노드
+
+뉴럴네트워크 말단에 보통 **Softmax-with-Loss 노드**를 둡니다. Softmax-with-Loss란 **소프트맥스 함수**와 **교차 엔트로피(Cross-Entropy) 오차**를 조합한 노드를 뜻합니다. 소프트맥스 함수와 교차 엔트로피의 수식은 아래와 같습니다.
+
+$${ y }_{ k }=\frac { exp({ a }_{ k }) }{ \sum _{ i=1 }^{ n }{ exp({ a }_{ i }) }  } \\ L=-\sum _{ k }^{  }{ { t }_{ k }\log { { y }_{ k } }  }$$
+
+($$a_k$$=노드의 입력값, $$L$$=노드의 출력값(Loss) $$t_k$$=정답 레이블(0 혹은 1), $$n$$=정답 범주 개수)
+
+Softmax-with-Loss 노드의 계산그래프를 매우 단순하게 그리면 아래와 같습니다.
+
+<br/>
+<center><img data-action="zoom" src='{{ "/assets/img/propagation_08.png" | relative_url }}' alt='absolute'></center>
+<br/>
+
+위 그림을 설명하자면 이렇습니다. Softmax-with-Loss 노드는 $$a$$를 입력으로 받아서 Loss $$L$$을 출력합니다. 역전파하는 그래디언트는 $$y_k-t_k$$가 됩니다. 예컨대 정답이 $$t_3$$이라면 역전파되는 그래디언트는 각각 $$y_1, y_2, y_3-1$$이 됩니다.
+
+요컨대 Softmax-with-Loss 노드의 역전파 그래디언트를 구하려면 입력값에 소프트맥스 확률값을 취한 뒤, 정답 레이블에 해당하는 요소만 1을 빼주면 된다는 얘기입니다.
