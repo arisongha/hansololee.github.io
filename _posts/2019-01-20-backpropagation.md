@@ -98,3 +98,19 @@ $$\frac { \partial L }{ \partial x } =\frac { \partial y }{ \partial x } \frac {
 이미 설명드렸듯이 $$\frac{\partial L}{\partial y}$$는 Loss로부터 흘러들어온 그래디언트입니다. $$\frac{\partial L}{\partial x}$$는 현재 입력값에 대한 현재 연산결과의 변화량, 즉 **로컬 그래디언트(Local Gradient)** 입니다.
 
 다시 말해 현재 입력값에 대한 Loss의 변화량은 Loss로부터 흘러들어온 그래디언트에 로컬 그래디언트를 곱해서 구한다는 이야기입니다. 이 그래디언트는 다시 앞쪽에 배치돼 있는 노드로 역전파됩니다.
+
+### 덧셈 노드
+
+덧셈 노드의 수식은 아래와 같습니다.
+
+$$z=f(x,y)=x+y$$
+
+덧셈 노드의 로컬 그래디언트는 아래와 같습니다.
+
+$$\frac { \partial z }{ \partial x } =\frac { \partial (x+y) }{ \partial x } =1\\ \frac { \partial z }{ \partial y } =\frac { \partial (x+y) }{ \partial y } =1$$
+
+덧셈 노드의 계산그래프는 아래와 같습니다. 현재 입력값에 대한 Loss의 변화량은 로컬 그래디언트에 흘러들어온 그래디언트를 각각 곱해주면 됩니다. 덧셈 노드의 역전파는 흘러들어온 그래디언트를 그대로 흘려보내는 걸 확인할 수 있습니다.
+
+<br/>
+<center><img data-action="zoom" src='{{ "/assets/img/propagation_02.png" | relative_url }}' alt='absolute'></center>
+<br/>
