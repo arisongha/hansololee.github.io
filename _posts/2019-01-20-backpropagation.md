@@ -114,3 +114,35 @@ $$\frac { \partial z }{ \partial x } =\frac { \partial (x+y) }{ \partial x } =1\
 <br/>
 <center><img data-action="zoom" src='{{ "/assets/img/propagation_02.png" | relative_url }}' alt='absolute'></center>
 <br/>
+
+### 곱셈 노드
+
+곱셈 노드의 수식은 아래와 같습니다.
+
+$$z=f(x,y)=xy$$
+
+곱셈 노드의 로컬 그래디언트는 아래와 같습니다.
+
+$$\frac { \partial z }{ \partial x } =\frac { \partial (xy) }{ \partial x } =y\\ \frac { \partial z }{ \partial y } =\frac { \partial (xy) }{ \partial y } =x$$
+
+곱셈 노드의 계산그래프는 아래와 같습니다. 현재 입력값에 대한 Loss의 변화량은 로컬 그래디언트에 흘러들어온 그래디언트를 각각 곱해주면 됩니다. 곱셈 노드의 역전파는 순전파 때 입력 신호들을 서로 바꾼 값을 곱해서 하류로 흘려보내는 걸 확인할 수 있습니다.
+
+<br/>
+<center><img data-action="zoom" src='{{ "/assets/img/propagation_03.png" | relative_url }}' alt='absolute'></center>
+<br/>
+
+### ReLU 노드
+
+**활성화함수(activation function)**로 사용되는 **ReLU**는 다음 식처럼 정의됩니다.
+
+$$y=x\quad (x>0)\\ y=0\quad (x\le 0)$$
+
+ReLU 노드의 로컬 그래디언트는 아래와 같습니다.
+
+$$\frac { \partial y }{ \partial x } =1\quad (x>0)\\ \frac { \partial y }{ \partial x } =0\quad (x\le 0)$$
+
+계산그래프는 아래와 같습니다.
+
+<br/>
+<center><img data-action="zoom" src='{{ "/assets/img/propagation_04.png" | relative_url }}' alt='absolute'></center>
+<br/>
