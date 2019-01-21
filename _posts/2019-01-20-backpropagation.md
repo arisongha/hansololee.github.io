@@ -71,3 +71,30 @@ $$\delta_j = \frac { \partial E_n }{ \partial a_j } =\sum_k \frac { \partial E_n
 $$\delta_j = h'(a_j) \sum_k w_{kj} \delta_k$$
 
 위 식으로부터 어떤 특정 은닛 유닛의 $$\delta$$ 값은 네트워크상에서 다음 단계에 있는 유닛들의 $$\delta$$ 값들을 전파시킴으로써 구할 수 있다는 것을 알 수 있습니다. 또한 출력 유닛들의 $$\delta$$값에 대해서는 이미 알고 있기 때문에 위의 식을 재귀적으로 적용하면 모든 은닉유닛의 $$\delta$$ 값을 구할 수가 있습니다.
+
+
+## 간단한 예시
+
+- 아래의 설명은 <a href="https://ratsgo.github.io/deep%20learning/2017/05/14/backprop/">이기창님의 ratsgo blog</a>를 발췌한 것입니다.
+
+우선 위에서 설명한 순전파(forward propagation)와 역전파(back propagation)의 계산과정을 그래프로 나타내어 보았습니다.
+
+<br/>
+<center><img data-action="zoom" src='{{ "/assets/img/propagation_01.png" | relative_url }}' alt='absolute'></center>
+<br/>
+
+위에서 설명한 **순전파(forward propagation)**는 위 계산그래프에서 계산을 왼쪽에서 오른쪽으로 진행하는 단계입니다. 위 그림 기준으로는 녹색 화살표가 됩니다. 입력값 x는 함수 f를 거쳐 y로 순전파되고 있는 점을 확인할 수 있습니다.
+
+반대로 계산을 오른쪽에서 왼쪽으로 진행하는 단계를 **역전파(backward propagation)**라고 합니다. 빨간색 화살표가 역전파를 가리킵니다.
+
+여기에서 $$\frac{\partial L}{\partial y}$$의 의미에 주목할 필요가 있습니다. 지금은 예시이기 때문에 노드를 하나만 그렸지만, 실제 뉴럴네트워크는 이러한 노드가 꽤 많은 큰 계산그래프입니다. 이 네트워크는 최종적으로는 정답과 비교한 뒤 **Loss**를 구합니다.
+
+우리의 목적은 뉴럴네트워크의 오차를 줄이는 데 있기 때문에, 각 파라메터별로 Loss에 대한 그래디언트를 구한 뒤 그래디언트들이 향한 쪽으로 파라메터들을 업데이트합니다. $$\frac{\partial L}{\partial y}$$는 $$y$$에 대한 Loss의 변화량, 즉 Loss로부터 흘러들어온 그래디언트라고 이해하면 좋을 것 같습니다.
+
+이제는 현재 입력값 $$x$$에 대한 Loss의 변화량, 즉 $$\frac{\partial L}{\partial x}$$ 를 구할 차례입니다. 이는 **미분 연쇄법칙(chain rule)**에 의해 다음과 같이 계산할 수 있습니다.
+
+$$\frac { \partial L }{ \partial x } =\frac { \partial y }{ \partial x } \frac { \partial L }{ \partial y }$$
+
+이미 설명드렸듯이 $$\frac{\partial L}{\partial y}$$는 Loss로부터 흘러들어온 그래디언트입니다. $$\frac{\partial L}{\partial x}$$는 현재 입력값에 대한 현재 연산결과의 변화량, 즉 **로컬 그래디언트(Local Gradient)** 입니다.
+
+다시 말해 현재 입력값에 대한 Loss의 변화량은 Loss로부터 흘러들어온 그래디언트에 로컬 그래디언트를 곱해서 구한다는 이야기입니다. 이 그래디언트는 다시 앞쪽에 배치돼 있는 노드로 역전파됩니다.
