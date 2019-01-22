@@ -38,11 +38,11 @@ $$\frac {\delta E_n}{\delta w_{ji}} = (y_{nj}-t_{nj})x_{ni}$$
 
 $$
 \begin{eqnarray}
-  w_{k+1}  &=& w_{k} - \mu \frac{\partial C}{\partial w} \\
-  =& w_{k} - \mu (y_{nj}-t_{nj})x_{ni}
+  w_{k+1}  &=& w_{k} - \mu \frac {\delta E_n}{\delta w_{ji}} \\
+  &=& w_{k} - \mu (y_{nj}-t_{nj})x_{ni}
 \end{eqnarray}
 $$
-  
+
 
 일반적인 피드포워드 네트워크에서 각 유닛들은 입력값들의 가중 합산을 계산합니다.
 
