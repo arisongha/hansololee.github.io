@@ -20,8 +20,6 @@ categories:
 
 그러면 word2vec을 사용하여 임베딩 후 스코어링한 과정을 살펴보겠습니다.
 
-## word2vec 단어 임베딩
-
 **임베딩(Embedding)** 이란 단어를 R차원의 벡터로 변환시켜주는 방법입니다. 벡터로의 변환은 Weight matrix에 의해 이루어지는데 이전 <a href="https://hansololee.github.io/naturallanguageprocessing/word2vec/">포스팅</a>을 참고하여 주시길 바랍니다.
 
 ### 1. 문장을 tokenizing 하기
