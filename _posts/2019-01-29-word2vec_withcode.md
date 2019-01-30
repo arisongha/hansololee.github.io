@@ -209,7 +209,7 @@ cnt_matrix = vect.transform(train_target).toarray()
 
 <br/>
 <center><img data-action="zoom" src='{{ "/assets/img/word2vec_withcode_02.png" | relative_url }}' alt='absolute'></center>
-<center><a href="https://hansololee.github.io/naturallanguageprocessing/word2vec_withcode/">출처</a></center>
+<center><a href="https://ratsgo.github.io/natural%20language%20processing/2017/03/08/word2vec/">출처</a></center>
 <br/>
 
 f1,f2,f3는 'racism' 같이 문장에 대해서 스코어링해주고 싶은 기준단어들입니다. 그리고 v1,v2,...,v7은 corpus내의 전체 단어의 개수입니다. 우리의 예시에서는 v67088까지 존재하겠군요. 즉 위 내적에서 첫번째 행렬은 기준단어들과 corpus내 모든 단어들 사이의 가중치행렬(`word_weight_matrix`)이라고 볼수 있습니다.  그리고 이 행렬에 곱해지는 벡터는 벡터화된 한 문장(`cnt_matrix`의 한 '행')이라고 볼수 있습니다. 이 들의 내적으로 나오는 행렬은 해당 문장의 f1에 대한 스코어가 0.8, f2에 대한 스코어가 0.7, f3에 대한 스코어가 0.4 가 되는 것입니다.
