@@ -26,6 +26,26 @@ categories:
 
 첫번째로 진행할 작업은 train data로 주어진 문장을 tokenizing하는 것입니다. tokenizing을 해주어야 word2vec의 파라미터 값으로 들어갈 수 있기때문입니다.
 
+우선 `csv` file을 read한 DataFrame이 아래 나와있습니다. 우리가 word2vec 모델에 적용할 corpus는 5번째 열, `lemmatized`가 될 것입니다. 참고로 이것은 `origin_question_text`에 'lemmatizing' 전저치를 해준 결과값입니다.
+
+<br/>
+<center><img data-action="zoom" src='{{ "/assets/img/rnn_03.png" | relative_url }}' alt='absolute'></center>
+<br/>
+
+```python
+final_df = pd.read_csv('./train_final5.csv')
+
+train_target = final_df["lemmatized"]
+train_target = train_target.apply(lambda x: str(x))
+train_corpus = list(train_target.apply(lambda x: word_tokenize(x)))
+```
+이렇게 tokenizing 해주게 되면 아래와 같이 한 문장이 tokenizing 되어 list로 표현되고 이러한 list 들이 모여 전체 list를 이루게 됩니다.
+
+```python
+train_corpus[1]
+```
+> 결과 : ['Doe','you','have','an','adopt','dog','how','would','you','encourage','people','to','adopt','and','not','shop']
+
 ### 2. word2vec으로 단어 임베딩하기
 
 그 다음으론 tokenized corpus에 gensim패키지를 활용해서 word2vec을 적용합니다. 위 코드의 파라미터를 알아보자면, 첫번째 파라미터로 tokenized된 문장의 corpus를 넣어주었습니다. 그리고 `size=100`으로 설정하였으므로 이 단어들을 학습해서 각 단어를 100차원의 벡터로 변경해줍니다. 또한 `sg=1`은 방법론으로 'skip-gram' 방식을 채택했음을 의미합니다. `window=2`이므로 중심 단어 앞뒤로 2개까지 학습합니다. 즉 중심단어와 앞뒤로 2개니까 총 4번 학습하게 되는 것이지요. `min_count=3`이므로 corpus 내 최소 3번이상 출현한 단어를 대상으로 합니다. `worker=2`는 듀얼코어 사용을 의미(작업 여건에 따라 다르겠지만 보통 core-1정도 하는걸로 알고있습니다.)하고, 마지막으로 `iter=100`은 100번 반복 학습하라는 의미입니다.
