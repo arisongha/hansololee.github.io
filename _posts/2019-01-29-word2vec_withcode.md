@@ -130,7 +130,7 @@ distance(word2vec_vec[1],word2vec_vec[3])
 ```
 > 결과: 2.78799937717712
 
-유클리드 거리를 구하는 `distance` function의 코드는 생략하였습니다. <a href="">깃헙</a>에서 확인하실 수 있습니다.
+유클리드 거리를 구하는 `distance` function의 코드는 생략하였습니다. <a href="https://github.com/hansololee/data-science-school/blob/master/project/quora_insincere_questions_classification/word2vec_score.ipynb">이곳</a>에서 확인하실 수 있습니다.
 
 ### 4. 문장에 대한 스코어 구하기
 
@@ -139,3 +139,90 @@ distance(word2vec_vec[1],word2vec_vec[3])
 > 'Which baby be more sweeter to their parent Dark skin baby or light skin baby'
 
 스코어라는 것은 이 문장의 각 단어들과 'racism' 이라는 단어간의 가중치(유사성)를 구하는 것이라고 생각하시면 됩니다. 그럼 천천히 그 방법을 알아보겠습니다.
+
+먼저 우리는 위에서 단어 사이의 유클리드 거리를 구한 바 있습니다. 이 유클리드 거리로 표현한 방식에서는 숫자가 작을 수록 즉, 거리가 가까울 수록 유사한 단어라고 할 수 있습니다. 그렇다면 특정 단어와 거리가 가까운 단어(유사한 단어)는 높은 단어는 높은 가중치를 주려고 한다면 어떻게 하면 될까요? 아래와 같은 수식을 이용하면 됩니다.
+
+$${ W }_{ ij }=exp\left( -\frac { d{ ({ x }_{ i },{ x }_{ j }) }^{ 2 } }{ 2\sigma^{2}  }  \right)$$
+
+위 수식으로써 단어간의 거리는 정규분포의 모양으로 스케일링 되게 됩니다.
+
+코드로 확인해보겠습니다. 우선 'racism'같이 문장을 스코어링 하고 싶은 대표단어와 `corpus`내의 모든 단어사이의 거리를 구해줍니다.
+
+```python
+def make_distance_matrix(word2vec_vec):
+    word2vec_matrix = np.zeros((len(weight_word_index_list),len(word2vec_vec)))
+
+    for i,word_index in enumerate(weight_word_index_list):
+        for j in range(len(word2vec_vec)):
+            word2vec_matrix[i][j] = distance(word2vec_vec[word_index],word2vec_vec[j])
+
+    return word2vec_matrix
+
+distance_matrix = make_distance_matrix(word2vec_vec)
+distance_matrix
+```
+참고로 이 코드에서 'racism' 같은 단어가 담겨져 있는 `weight_word_index_list`는 위에서 변수에 저장한 word2vec으로 임베딩된 단어의 index입니다.
+
+그 이후에 이 거리행렬을 위 수식으로 **표준화** 해줍니다.
+
+```python
+def make_weight_matrix(distance_matrix):
+    word_weight_matrix = np.zeros((len(distance_matrix), len(distance_matrix[0])))
+
+    std = np.std(word2vec_vec)
+    for i in range(len(distance_matrix)):
+        for j in range(len(distance_matrix[0])):
+            word_weight_matrix[i][j] = exp((-distance_matrix[i][j]**2)/(2*(std**2)))
+    return word_weight_matrix
+
+word_weight_matrix = make_weight_matrix(word2vec_matrix)
+word_weight_matrix
+```
+
+여기서 `make_distance_matrix` function과 `make_weight_matrix` function은 하나의 function 안에서 돌리는 것이 좋지만 코드의 이해를 돕기 위해 나누어서 표현해 주었습니다.
+
+이렇게 되면 return된 `word_weight_matrix`는 'N X 67088' 의 행렬이 됩니다. 여기서 N은 문장을 스코어링해줄 'racism' 같은 단어를 얼마나 많이 `weight_word_index_list`에 포함시켰느냐에 따라 정해집니다.
+
+마지막으로 문장을 스코어링하기전에 각각의 문장이 어떤 단어들로 표현되어 있는지 벡터화 해야합니다. 아래 표로 무슨 말인지 설명드리겠습니다.
+
+|  /  | paragraph1 | paragraph2 | paragraph3 | ... |
+|:--:|:--:|:--:|:--:|:--:|
+| you | 1| 0 | 1 | ... |
+| have| 1 | 0 | 0 | ... |
+| an  | 1 | 1 | 0 | ... |
+| ... | ... | ... | ... | ... |
+
+위의 표를 보면 느낌이 오시겠지만 paragraph1에 해당하는 문장에는 you, have, an 이라는 단어가 모두 들어있어서 전부 1로 표현되었습니다. 반대로 해당 paragraph2 문장을 보시면 you, have 를 포함하지 않고 있어서 0으로 표현되어 있습니다.
+
+이렇게 문장단위로 countvecorize 하는 코드를 보겠습니다.
+
+```python
+embed_word_list = embedding_model.wv.index2word
+vect = CountVectorizer(vocabulary=embed_word_list)
+cnt_matrix = vect.transform(train_target).toarray()
+```
+
+`cnt_matrix`를 확인해보면 아래와 같이 벡터화된 문장들의 리스트를 확인할 수 있습니다. 그리고 이 행렬의 사이즈는 `len(train_target)` X 67088 입니다.
+> 결과: [[0,0,0,0,1,0,0,0,0,...0,1,0],...,]
+
+이제 마지막 단계 입니다. 위에서 구했던 `word_weight_matrix` 와 방금 구했던 `cnt_matrix`를 **내적** 해주면 각 문장에 대해서 스코어를 구할 수 있게 됩니다. 무슨 말인지 아래 그림을 보면서 설명드리겠습니다.
+
+<br/>
+<center><img data-action="zoom" src='{{ "/assets/img/word2vec_withcode_02.png" | relative_url }}' alt='absolute'></center>
+<br/>
+
+f1,f2,f3는 'racism' 같이 문장에 대해서 스코어링해주고 싶은 기준단어들입니다. 그리고 v1,v2,...,v7은 corpus내의 전체 단어의 개수입니다. 우리의 예시에서는 v67088까지 존재하겠군요. 즉 위 내적에서 첫번째 행렬은 기준단어들과 corpus내 모든 단어들 사이의 가중치행렬(`word_weight_matrix`)이라고 볼수 있습니다.  그리고 이 행렬에 곱해지는 벡터는 벡터화된 한 문장(`cnt_matrix`의 한 '행')이라고 볼수 있습니다. 이 들의 내적으로 나오는 행렬은 해당 문장의 f1에 대한 스코어가 0.8, f2에 대한 스코어가 0.7, f3에 대한 스코어가 0.4 가 되는 것입니다.
+
+코드는 다음과 같습니다.
+
+```python
+def make_scored_matrix(word_weight_matrix,cnt_matrix):
+    scored_matrix = []
+    for i in cnt_matrix:
+        scored_matrix.append(np.dot(word_weight_matrix,i))
+    return scored_matrix
+
+    scored_matrix = make_scored_matrix(word_weight_matrix,cnt_matrix)
+    scored_matrix
+```
+이상으로 문장 스코어링에 대한 코딩을 마쳤습니다. 모든 코드를 보고 싶으시면 <a href="https://github.com/hansololee/data-science-school/blob/master/project/quora_insincere_questions_classification/word2vec_score.ipynb">이곳</a>을 방문해주시길 바랍니다.
