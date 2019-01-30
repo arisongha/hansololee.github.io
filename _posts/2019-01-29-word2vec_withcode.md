@@ -29,7 +29,7 @@ categories:
 우선 `csv` file을 read한 DataFrame이 아래 나와있습니다. 우리가 word2vec 모델에 적용할 corpus는 5번째 열, `lemmatized`가 될 것입니다. 참고로 이것은 `origin_question_text`에 'lemmatizing' 전저치를 해준 결과값입니다.
 
 <br/>
-<center><img data-action="zoom" src='{{ "/assets/img/rnn_03.png" | relative_url }}' alt='absolute'></center>
+<center><img data-action="zoom" src='{{ "/assets/img/word2vec_withcode_01.png" | relative_url }}' alt='absolute'></center>
 <br/>
 
 ```python
