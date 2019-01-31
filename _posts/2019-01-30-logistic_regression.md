@@ -29,7 +29,5 @@ $$\hat y = W^Tx + b$$
 $$\hat y = \sigma (W^Tx + b)$$
 
 시그모이는 함수는 이렇게 생겼습니다.
-
-<br/>
 <center><img data-action="zoom" src='{{ "/assets/img/logistic_regression_01.png" | relative_url }}' alt='absolute'></center>
 <br/>
