@@ -32,3 +32,14 @@ $$\hat y = \sigma (W^Tx + b)$$
 <center><img data-action="zoom" src='{{ "/assets/img/logistic_regression_01.png" | relative_url }}' alt='absolute'></center>
 <center><a href="https://towardsdatascience.com/multi-layer-neural-networks-with-sigmoid-function-deep-learning-for-rookies-2-bf464f09eb7f">출처</a></center>
 <br/>
+
+여기서 주목할 것은 위 그래프에 표현된 시그모이드 함수의 수식입니다.
+
+$$\text{logitstic}(z) = \sigma(z) = \dfrac{1}{1+\exp{(-z)}}$$
+
+만약 $$z$$가 매우 크다면 우변 분모에 위치한 $$exp(-z)$$가 0으로 수렴합니다. 그러므로 $$\sigma(z) \approx 1$$ 입니다. 이는 그래프에서도 쉽게 확인할 수 있습니다. $$z$$가 커질수록 그래프는 1에 수렴하는 것을 볼 수 있습니다. 반대로 $$z$$가 매우 큰 음수라면 $$exp(-z)$$가 $$\infty$$ 으로 발산합니다. 그러므로 $$\sigma(z) \approx 0$$ 입니다. 이 역시 그래프에서 쉽게 확인할 수 있습니다.
+
+우리는 이렇게 $$y$$가 핫도그라고 잘 예측하도록 파라미터 $$W,b$$를 학습해야 합니다.
+
+
+## 로지스틱 회귀의 비용함수
