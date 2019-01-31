@@ -30,4 +30,5 @@ $$\hat y = \sigma (W^Tx + b)$$
 
 시그모이는 함수는 이렇게 생겼습니다.
 <center><img data-action="zoom" src='{{ "/assets/img/logistic_regression_01.png" | relative_url }}' alt='absolute'></center>
+<center><a href="https://towardsdatascience.com/multi-layer-neural-networks-with-sigmoid-function-deep-learning-for-rookies-2-bf464f09eb7f">출처</a></center>
 <br/>
