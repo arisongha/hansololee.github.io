@@ -69,3 +69,19 @@ $$-\frac {1}{m} \sum_{i=1}^m \left[ y^{(i)}log\hat y^{(i)} + (1-y^{(i)})log(1-\h
 
 
 ## 파라미터 학습 방법
+
+비용함수는 파라미터 $$W,b$$가 훈련세트를 잘 예측하는지 측정하는데, 파라미터를 알아내기 위해서 비용함수를 가장 작게 만드는 $$W,b$$를 찾아야 합니다. 여기서 비용함수는 아래의 그림과 같습니다.
+
+<br/>
+<center><img data-action="zoom" src='{{ "/assets/img/logistic_regression_02.png" | relative_url }}' alt='absolute'></center>
+<br/>
+
+그림을 간단히 설명하자면 비용함수 $$J(W,b)$$는 가로축 $$W,b$$ 상의 곡면이, 곡면의 높이는 비용함수 $$J(W,b)$$의 값을 나타냅니다. 그리고 보시다시피 여기서 비용함수 $$J$$는 활처럼 볼록한 함수입니다. 그러므로 비용함수 $$J$$의 최소값에 해당하는 위치는 가장 아래 부분의 꼭지점 부분일 것입니다. 그리고 그 위치에서의 파라미터 $$W,b$$를 우리가 찾고 싶은 것입니다. 한가지 중요한것은 비용함수의 모양이 볼록해야 한다는 점입니다. 볼록하지 않으면 아래 그림처럼 지역 최저값을 여러개 가질 수 있기 때문입니다
+
+<br/>
+<center><img data-action="zoom" src='{{ "/assets/img/logistic_regression_03.png" | relative_url }}' alt='absolute'></center>
+<br/>
+
+다시 본론으로 돌아와서, 파라미터 $$W,b$$를 어떤 초기값으로 초기화 합니다. 초기값 설정으로는 여러 방법을 사용할 수 있지만 보통은 0으로 설정합니다. 그리고 <a href="https://hansololee.github.io/optimization/sgd/">경사하강법</a>을 이용하여 비용함수의 최소점을 찾아 단계적으로 나아갑니다. 수식은 아래와 같습니다. 경사하강법의 자세한 설명은 위 링크를 클릭해주시길 바랍니다.
+
+$$x_{k+1} = x_{k} - \mu \nabla f(x_k) = x_{k} - \mu g(x_k)$$
