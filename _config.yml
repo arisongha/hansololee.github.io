@@ -230,6 +230,13 @@ plugins:
   - jekyll-feed
   - jemoji
   - jekyll-include-cache
+  - jekyll-paginate-v2
+
+# Pagination 
+pagination:
+  enabled: true
+  per_page: 9
+  sort_reverse: true # 안 해주면 오래된 것부터 나옴
 
 # mimic GitHub Pages with --safe
 whitelist:
