@@ -230,6 +230,12 @@ plugins:
   - jekyll-feed
   - jemoji
   - jekyll-include-cache
+  - jekyll-paginate-v2
+
+pagination:
+  enabled: true
+  per_page: 9
+  sort_reverse: true
 
 # mimic GitHub Pages with --safe
 whitelist:
