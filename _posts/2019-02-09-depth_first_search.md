@@ -5,6 +5,6 @@ tags:
   - Depth First Search
 
 categories:
-  - Algorithm
+  - MachineLearning
 ---
 
