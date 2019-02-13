@@ -1,11 +1,11 @@
 ---
-title: 깊이우선 탐색 *
+title: 깊이 우선 탐색 *
 tags:
   - 깊이우선탐색
   - Depth First Search
 
 categories:
-  - AlgorithmTest
+  - Algorithm
 ---
 
 - 제목에 * 표시가 있는 것은 추가할 내용이 있거나 수정할 내용이 있다는 표시입니다.
@@ -30,16 +30,93 @@ categories:
 
 탐색의 시작은 노드 A부터 시작합니다. 그리고 A에서 아래방향으로 갈 수 있는 곳이 있나 찾습니다. 일단 B와 C가 있지만 왼쪽에 위치한 것부터 발견하므로 노드 B를 먼저 찾게 됩니다. 그래서 그림에서 처럼 **1** 번 화살표 이동을 하게됩니다. 이렇게 깊이우선 탐색 규칙에 따라서 노드 B 다음에 위치한 노드를 탐색해야합니다. 하지만 노드 B를 조사하고 난 후에는 노드 A로 다시 돌아와야 하는데 B 노드 이전에 A노드를 거쳤다는 것을 어떻게 알 수 있을까요? 그리고 노드 A로 돌아왔을 때, 노드 B에 방문했었는지는 어떻게 알수 있을까요?
 
- 노드 B를 탐색하기 이전에 노드 A에 방문했다고 표시해놓으면 이후에 돌아와서도 탐색을 계속할 수 있습니다. 메모리 그림으로 나타내면 다음과 같습니다.
+ 노드 B를 탐색하기 이전에 노드 A에 방문했다고 표시해놓으면 이후에 돌아와서도 탐색을 계속할 수 있습니다. 그러므로 노드 A를 스택에 넣습니다.
 
- > A | | | | ...
+ > 스택: A | | | | ...
 
- 이후에 **1** 번 화살표 이동을 하여 노드 B까지 이동합니다. 이 때 마찬가지로 노드 B에 방문했다는 것을 배열에 저장합니다.
+스택에 쌓여있던 노드 A를 꺼내어 출력하고 노드 A의 자식노드인 노드 B와 노드 C를 다시 스택에 쌓아줍니다.
 
- > A | B | | | ...
+ > 스택: C | B | | | ...
+ 출력: A
 
- 그 다음으로 **2** 번 화살표 이동대로 노드 D까지 이동합니다. 또한 노드 D에 방문했다는 것을 저장합니다.
+ 마찬가지로 마지막에 쌓여있는 노드 B를 꺼내어 출력하고 자식노드인 노드 D를 쌓아줍니다.
 
- > A | B | D | | ...
+ > C | D | | | ...
+ 출력: A B
 
- 노드 D 아래에는 G와 H 2개의 노드가 있습니다. 왼쪽 우선 탐색이므로 노드 G로 먼저 이동합니다. 그런데 노드 G 아래에는 더이상 노드가 존재하지 않습니다. 따라서 다시 이전 노드인 D로 돌아가야 합니다. 이 떄 배열을 이용합니다. 배열의 맨 왼쪽에 있는 노드는 시작 지점과 가까운 노드이고 배열의 맨 오른쪽에 있는 노드는 시작 지점과 먼 노드입니다. 이때 이전 노드로 돌아가려면 배열 맨 오른쪽에 저장된 노드 정보를 이용하면 됩니다.
+ 다시 노드 D를 꺼내어 출력하고 노드 D의 자식노드인 노드 G와 노드 H를 스택에 쌓아줍니다.
+
+ > C | H | G | | ...
+ 출력: A B D
+
+ 스택 맨위에 쌓여있는 노드 G를 꺼내어 출력하고 노드 G의 자식노드를 스택에 쌓아야하는데 노드 G에는 자식노드가 없으므로 쌓을 노드가 없습니다.
+
+ > C | H | | | ...
+ 출력: A B D G
+
+ 다시 스택 맨위에 쌓여있는 노드 H를 꺼내어 출력하고 노드 H의 자식노드를 쌓아야하지만 역시 자식노드가 없으므로 쌓아야할 노드 또한 없습니다.
+
+ > C | | | | ...
+ 출력: A B D G H
+
+ 이제 스택에 남아있는 노드는 노드 C 하나입니다. 노드 C를 꺼내어 출력하고 자식노드인 노드 E와 노드 F를 스택에 쌓아줍니다.
+
+ > F | E | | | ...
+ 출력: A B D G H C
+
+ 쭉 이러한 과정을 반복해나가며 스택에서 노드를 꺼내어 출력하고 꺼낸 노드의 자식노드를 쌓아올리고를 반복하여 줍니다. 스택에 노드가 남아있지 않을 때까지 과정을 반복하면 출력결과물(방문노드 순서)은 다음과 같습니다.
+
+ > 출력: A B D G H C E I J F K L
+
+ 이 과정을 파이썬 코드로 구현해 보겠습니다. graph는 <a href="https://en.wikipedia.org/wiki/Adjacency_list">Adjacency list(인접 리스트)</a> 로 표현하였습니다.
+
+```python
+graph = {'A': set(['B', 'C']),
+         'B': set(['D']),
+         'C': set(['E', 'F']),
+         'D': set(['G', 'H']),
+         'E': set(['I', 'J']),
+         'F': set(['K', 'L']),
+         'G': set(['D']),
+         'H': set(['D']),
+         'I': set(['E']),
+         'J': set(['E']),
+         'K': set(['F']),
+         'L': set(['F'])}
+
+def dfs(graph, start):
+    visited = []
+    stack = [start]
+
+    while stack:
+        node = stack.pop()
+
+        if node not in visited:
+
+            visited.append(node)
+            childnode = sorted(graph[node] - set(visited))
+            childnode.reverse()
+
+            stack += childnode
+
+    return visited
+
+dfs(graph, 'A')
+```
+
+위 `def` function 에서 아래 코드에 해당하는 부분은 자식노드중 맨 왼쪽 노드를 우선 탐색하기 위한 코드입니다.  
+
+```python
+childnode = sorted(graph[node] - set(visited))
+childnode.reverse()
+```
+
+이로써 깊이우선 탐색에 대한 설명을 마치겠습니다. **너비우선 탐색(Breadth First Search)** 설명에 앞서서 재미있는 그림하나를 보고 이해를 도운 뒤 넘어가겠습니다.
+
+<br/>
+<center><a href="http://ai.berkeley.edu/home.html">CS188x강의</a></center>
+<center><img data-action="zoom" src='{{ "/assets/img/dfs_02.png" | relative_url }}' alt='absolute'></center>
+<center>깊이우선 탐색</center>
+<center><img data-action="zoom" src='{{ "/assets/img/dfs_03.png" | relative_url }}' alt='absolute'></center>
+<center>너비우선 탐색</center>
+<br/>
