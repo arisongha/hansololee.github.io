@@ -115,7 +115,7 @@ childnode.reverse()
 이로써 깊이우선 탐색에 대한 설명을 마치겠습니다. **너비우선 탐색(Breadth First Search)** 설명에 앞서서 재미있는 그림하나를 보고 이해를 도운 뒤 넘어가겠습니다.
 
 <br/>
-<center><a href="http://ai.berkeley.edu/home.html">CS188x강의</a></center>
+<center><a href="http://ai.berkeley.edu/home.html">출처</a></center>
 <center><img data-action="zoom" src='{{ "/assets/img/dfs_02.png" | relative_url }}' alt='absolute'></center>
 <center>깊이우선 탐색</center>
 <center><img data-action="zoom" src='{{ "/assets/img/dfs_03.png" | relative_url }}' alt='absolute'></center>
