@@ -21,7 +21,7 @@ categories:
 깊이우선 탐색이 자료구조 스택을 사용하여 메모리에 쌓인 노드 중 맨 마지막에 쌓인 것부터 꺼내어 탐색했다면, 너비우선 탐색은 그와는 반대로 큐를 사용하여 메모리에 추가된 노드 중 가장 오래된 것부터 차례대로 탐색해야 합니다. 그럼 탐색 과정을 아래 그래프를 보면서 이해하겠습니다.
 
 <br/>
-<center><img data-action="zoom" src='{{ "/assets/img/bfs_01.jpg" | relative_url }}' alt='absolute'></center><center><a href="https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/tutorial/">출처</a>
+<center><img data-action="zoom" src='{{ "/assets/img/bfs_01.jpg" | relative_url }}' alt='absolute'></center><center><a href="https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/tutorial/">출처</a></center>
 <br/>
 
 우선 제일 상단에 있는 노드 0를 먼저 탐색합니다.
@@ -84,7 +84,6 @@ graph = {'0': set(['1', '2', '3']),
 
 bfs(graph, '0')
 ```
-
 위 `bfs` function 에서 아래 코드에 해당하는 부분은 같은 Layer에 해당하는 노드 중 맨 왼쪽부터 순서대로 탐색하기 위한 코드입니다.
 
 ```python
