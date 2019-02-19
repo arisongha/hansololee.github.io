@@ -1,13 +1,8 @@
-
 ---
-title: 최적화 알고리즘 *
+title: 최적화 알고리즘*
 tags:
   - 최적화
   - Optimization
-  - Mini Batch Gradient Descent 
-  - Exponentially Weighted Average
-  - Momentum
-  - RMSprop
 
 categories:
   - DeepLearning
