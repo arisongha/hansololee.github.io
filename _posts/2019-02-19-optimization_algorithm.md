@@ -1,5 +1,5 @@
 ---
-title: 최적화 알고리즘*
+title: 최적화 알고리즘(Optimization Algorithms) *
 tags:
   - 최적화
   - Optimization
