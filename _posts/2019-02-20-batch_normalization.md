@@ -1,5 +1,5 @@
 ---
-title: 배치 정규화*
+title: 배치 정규화(Batch Nomalization) *
 tags:
   - 정규화
   - Normalization
