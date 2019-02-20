@@ -1,6 +1,7 @@
 
 ---
 title: 배치 정규화(Batch Normalization) *
+
 tags:
   - 배치정규화
   - Normalization
