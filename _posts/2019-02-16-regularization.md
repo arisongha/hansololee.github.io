@@ -32,12 +32,11 @@ $$J(w,b) = \frac {1}{m} \sum_{i=1}^m L\left(\hat y^{(i)},y^{(i)}\right) + \frac{
 마지막 과정으로 정규화가 추가된 비용함수의 경사하강법을 구현하는 방법을 알아보겠습니다. 우리는 이전에 역전파를 통해서 $$J$$의 $$w$$편미분값인 $$dw$$를 계산했습니다. 그리고 $$w^{[l]}$$에 기존의 $$w^{[l]}$$에서 $$\alpha dw^{[l]}$$를 뺀 값을 대입해 업데이트 하였습니다. 여기에 정규화 항을 추가하게 되면 $$dw$$는 $$dw^{[l]} + \frac{\lambda}{m}w^{[l]}$$ 이 됩니다. 그리고 이 새로운 $$dw$$를 경사하강법 식에 대입하게 되면 아래와 같은 새로운 식이 도출됩니다.
 
 $$
-% <![CDATA[
-\begin{align*}
+\begin{eqnarray*}
 w^{[l]}
 &=& w^{[l]} - \alpha (dw^{[l]} + \frac{\lambda}{m}w^{[l]}) \\
 &=& w^{[l]} - \frac{\alpha \lambda}{m} w^{[l]} - \alpha dw^{[l]} \\
 &=&
 \left(1- \frac{\alpha \lambda}{m} \right) w^{[l]} - \alpha dw^{[l]} \\
-\end{align*} %]]>
+\end{eqnarray*}
 $$
