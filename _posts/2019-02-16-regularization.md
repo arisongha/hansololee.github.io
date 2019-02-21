@@ -35,9 +35,9 @@ $$
 % <![CDATA[
 \begin{align*}
 w^{[l]}
-&=& w^{[l]} - \alpha (dw^{[l]} + \frac{\lambda}{m}w^{[l]})
-&=& w^{[l]} - \frac{\alpha \lambda}{m} w^{[l]} - \alpha dw^{[l]}
+&=& w^{[l]} - \alpha (dw^{[l]} + \frac{\lambda}{m}w^{[l]}) \\
+&=& w^{[l]} - \frac{\alpha \lambda}{m} w^{[l]} - \alpha dw^{[l]} \\
 &=&
-\left(1- \frac{\alpha \lambda}{m} \right) w^{[l]} - \alpha dw^{[l]}
+\left(1- \frac{\alpha \lambda}{m} \right) w^{[l]} - \alpha dw^{[l]} \\
 \end{align*} %]]>
 $$
