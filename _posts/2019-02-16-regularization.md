@@ -35,5 +35,10 @@ $$
 % <![CDATA[
 \begin{align*}
 w^{[l]} = w^{[l]} - \alpha (dw^{[l]} + \frac{\lambda}{m}w^{[l]})
+&=\begin w^{[l]} - \frac{\alpha \lambda}{m} w^{[l]} - \alpha dw^{[l]}
+\end
+&=\begin
+\left(1- \frac{\alpha \lambda}{m} \right) w^{[l]} - \alpha dw^{[l]}
+\end
 \end{align*} %]]>
 $$
