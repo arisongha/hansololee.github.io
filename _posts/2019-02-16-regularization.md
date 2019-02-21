@@ -44,3 +44,23 @@ $$
 이 식으로써 $$w^{[l]}$$이 무슨 값이든 그 값보다 더 작아진다는 것을 확인할 수 있습니다. 이 것은 **L2 Norm 정규화**가 가중치감쇠(Weight Decay)** 라고 불리는 이유이기도 합니다. 정규화 식을 알아보았으니 이제는 '왜 정규화가 과대적합을 막을 수 있는가?' 에 대해서 알아보겠습니다.
 
 ## 정규화가 과대적합을 줄일수 있는 이유
+
+뉴럴네트워크의 활성화함수 $$g$$로 $$tanh$$를 사용한다고 가정해보겠습니다.
+
+$$g(z^{[l]}) = tanh(z^{[l]})$$
+
+비용함수 $$J$$에서 정규화 매개변수 $$\lambda$$가 커질때 비용함수가 커지지 않으려면 상대적으로 $$w$$가 작아질 것입니다. 그리고 위에 적어놓은 활성화 함수에서 $$z$$는 $$w^{[l]}a^{[l-1]} + b^{[l]}$$과 같기 때문에 $$w$$가 작으면 상대적으로 $$z$$도 작은 값을 가지게 됩니다. 아래와 같이 활성화함수 $$tanh$$ 그림으로 설명드리면 $$z$$값이 주황색 범위와 같은 값들을 가지게 되어 활성화 함수 $$g$$는 거의 1차원 함수에 가깝게 됩니다.
+
+<br/>
+<center><img data-action="zoom" src='{{ "/assets/img/regularization_01.png" | relative_url }}' alt='absolute'></center>
+<center><a href="http://databeauty.com/blog/2018/01/16/From-Perceptron-to-Deep-Learning.html">출처</a></center>
+<br/>
+
+따라서 뉴럴네트워크의 모든 Layer가 선형함수를 가지게 되고 결과적으로 전체 네크워크도 선형에 가깝게 되는 것입니다. 이는 매우 복잡한 비선형 함수에 의한 뉴럴네트워크보다 과대적합을 막을 수 있는 간단한 함수가 되는 것과 마찬가지 효과를 거두게 되는 것입니다. 그림으로 이해하자면 아래와 같습니다.
+
+<br/>
+<center><img data-action="zoom" src='{{ "/assets/img/regularization_02.png" | relative_url }}' alt='absolute'></center>
+<center><a href="http://deeplearning.ai">Andrew Ng 강의록</a></center>
+<br/>
+
+즉, 위 그림처럼 맨 오른쪽의 과대적합한 경우를 맨 왼쪽 그림처럼 높은 편향 경우와 가깝게 만들어 줄 수 있는 것입니다. 하지만 중간 그림의 경우와 가깝게 적절한 정규화 매개변수 $$\lambda$$를 찾는 것이 중요합니다.
