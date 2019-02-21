@@ -34,11 +34,10 @@ $$J(w,b) = \frac {1}{m} \sum_{i=1}^m L\left(\hat y^{(i)},y^{(i)}\right) + \frac{
 $$
 % <![CDATA[
 \begin{align*}
-w^{[l]} = w^{[l]} - \alpha (dw^{[l]} + \frac{\lambda}{m}w^{[l]})
-&=\begin w^{[l]} - \frac{\alpha \lambda}{m} w^{[l]} - \alpha dw^{[l]}
-\end
-&=\begin
+w^{[l]}
+&=& w^{[l]} - \alpha (dw^{[l]} + \frac{\lambda}{m}w^{[l]})
+&=& w^{[l]} - \frac{\alpha \lambda}{m} w^{[l]} - \alpha dw^{[l]}
+&=&
 \left(1- \frac{\alpha \lambda}{m} \right) w^{[l]} - \alpha dw^{[l]}
-\end
 \end{align*} %]]>
 $$
