@@ -70,7 +70,7 @@ $$g(z^{[l]}) = tanh(z^{[l]})$$
 L2 정규화 외에 또 다른 강력한 정규화 기법이 있습니다. 바로 **드롭아웃(Drop Out)** 입니다. 이름에서도 지레 짐작할 수 있듯이 이 방식은 뉴럴네트워크의 각 Layer에 대해서 노드를 삭제하는 확률을 설정하는 방법입니다. 그림으로 이해를 돕겠습니다. 우선 아래 왼쪽 그림과 같은 상태의 뉴럴네트워크에 대해서 각 노드를 0.5의 확률로 유지하거나 삭제한다고 가정해 봅니다.
 
 <br/>
-<center><img data-action="zoom" src='{{ "/assets/img/regularization_02.png" | relative_url }}' alt='absolute'></center>
+<center><img data-action="zoom" src='{{ "/assets/img/regularization_03.png" | relative_url }}' alt='absolute'></center>
 <center><a href="https://www.researchgate.net/figure/Dropout-neural-network-model-a-is-a-standard-neural-network-b-is-the-same-network_fig3_309206911">출처</a></center>
 <br/>
 
