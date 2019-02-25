@@ -1,19 +1,18 @@
 ---
-title: 최적화 알고리즘(Optimization Algorithms) *
+title: 미니배치 경사하강법(Mini-batch Gradient Descent) *
 tags:
-  - 최적화
-  - Optimization
+  - 미니배치 경사하강법
+  - Mini-batch
+  - Gradient Descent
 
 categories:
-  - DeepLearning
+  - Optimization
 ---
 
 - 제목에 * 표시가 있는 것은 추가할 내용이 있거나 수정할 내용이 있다는 표시입니다.
 - 이 글은 deepLearning.ai의 <a href="https://www.deeplearning.ai/">Andrew Ng 교수님 강의</a>를 정리하였음을 미리 밝힙니다.
 
-# 여러가지 최적화 알고리즘
-
-## 미니배치 경사하강법(Mini-batch Gradient descent)
+# 미니배치 경사하강법(Mini-batch Gradient Descent)
 
 벡터화는 훈련 샘플 m개에 대한 계산을 상대적으로 효율적이고 빠르게 만들어 줍니다. 명시적인 `for loop`가 없이도 훈련을 진행할 수 있게 해주지요. 하지만 훈련 샘플 m이 엄청나게 큰 수라면 어떨까요? 전체 훈련 샘플에 대한 경사하강법을 구현한다면 경사하강법의 작은 한 Step을 밟기 전에 모든 훈련 샘플를 처리해야합니다. 예를 들어 훈련 샘플 m이 5백만개라고 가정한다면, 경사하강법의 매 Step 마다 5백만개의 전체 훈련 샘플을 처리해야합니다. 미니 배치 경사하강법은 이렇게 비효율적이고 더딘 방법을 개선하여 5백만개의 거대한 훈련 샘플을 모두 처리하기 전에 경사하강법이 진행하도록 하는 알고리즘입니다.
 
@@ -22,7 +21,7 @@ categories:
 훈련세트에서 미니배치 경사하강법을 실행하기 위해서는 미니배치의 개수만큼 `for loop`를 돌려야합니다. 이 반복문 안에서 하는 일은 한 단계의 경사하강법을 구현하는 것입니다. 아래는 이해를 돕기위해 `for loop`를 수도코드 형식으로 짜본것입니다.
 
 ```python
-for t range(5000):
+for t in range(5000):
 
     # forward prop
     Z^[1] = W^[1]*X^{t} + b^[1]
