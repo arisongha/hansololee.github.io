@@ -63,9 +63,8 @@ $$
 \document{article}
 \usepackage{cancel, xcolor}
 \newcommand\Colorcancel[1][black]{\renewcommand\CancelColor{\Color{#1]}}\cancel}
-% <![CDATA[
+
 \begin{document}
 \[v_{100} = 0.1\theta_{100} + 0.9 \Colorcancel[red]{v_{99}} (0.1\theta_{99} + 0.9v_{98})\]
 \end{document}
-%]]>
 $$  
