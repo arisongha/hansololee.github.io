@@ -42,7 +42,7 @@ $$v_t \approx$$ average of the previous $$\frac{1}{1-\beta}$$ data
 <center><img data-action="zoom" src='{{ "/assets/img/exp_weighted_average_03.png" | relative_url }}' alt='absolute'></center>
 <br/>
 
-1/(1-0.5)의 값이 2이므로 2개의 데이터의 평균값으로 그래프가 그려집니다. 오직 2개의 데이터만 이용하므로 노이즈가 심하고 민감한 그려지는 것입니다.
+1/(1-0.5)의 값이 2이므로 2개의 데이터의 평균값으로 그래프가 그려집니다. 오직 2개의 데이터만 이용하므로 노이즈가 심하고 민감한 그래프가 그려지는 것입니다.
 
 그럼 이제 처음에 봤던 지수가중이동평균 식을 상세하게 분석해 보겠습니다.
 
