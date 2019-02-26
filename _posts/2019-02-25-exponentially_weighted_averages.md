@@ -60,9 +60,9 @@ $$
 설명을 편하게 하기위해서 $$v_t$$의 순서를 역순으로 했습니다. 맨 위에 $$v_{100}$$ 에 대한 식은 아래와 같이 대체할 수 있습니다.
 
 $$
-\usepackage{cancel, xcolor}
-\newcommand\Colorcancel[1][black]{\renewcommand\CancelColor{\Color{#1}}\cancel}
-\begin{document*}
-\[v_{100} = 0.1\theta_{100} + 0.9 \Colorcancel[red]{v_{99}} (0.1\theta_{99} + 0.9v_{98})\]
-\end{document*}
+\documentclass{standalone}
+\usepackage{cancel}
+\begin{document}
+\[v_{100} = 0.1\theta_{100} + 0.9 \bcancel{v_{99}} (0.1\theta_{99} + 0.9v_{98})\]
+\end{document}
 $$  
