@@ -21,7 +21,7 @@ $$v_t = \beta v_{t-1} + (1-\beta)\theta_t$$
 
 우선, $$\beta$$ 가 0.9일 경우를 보겠습니다. 사실 이 때의 $$v_t$$ 는 이전 10개의 데이터의 평균과 거의 같습니다. 이는 아래 식으로 계산해낼 수 있습니다.
 
-$$\begin{center}v_t \approx \end{center}$$ average of the previous $$\frac{1}{1-\beta}$$ data
+$$v_t \approx$$ average of the previous $$\frac{1}{1-\beta}$$ data
 
 우선 지금은 $$\beta$$ 에 따른 지수가중이동평균값을 이해하기위해 위 식이 성립하는 이유는 나중에 언급하겠습니다. 다시 돌아와서 $$\beta$$ 가 0.9일때 지수가중이동평균 그래프는 다음과 같이 그려집니다. 아래 붉은선 그래프는 일년동안의 기온변화를 지수가중이동평균으로 나타낸 그래프입니다.
 
