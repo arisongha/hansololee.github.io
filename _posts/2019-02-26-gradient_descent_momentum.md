@@ -38,7 +38,7 @@ On iteration t:
     b = b - alpha * V_db
 ```
 
-중간에 `#2` 과정에 해당하는 코드는 이전에 소개해 드렸던 <a href="https://hansololee.github.io/optimization/exponentially_weighted_averages/">지수가중이동평균법</a>과 흡사합니다. 지수가중평균이동법에서 $$\beta$$ 값에 따라서 그려지는 그래프가 완만해지거나 민감해졌었습니다. Momentum 경사하강법에서도 이와같이 경사하강법의 단계를 부드럽게 만들어줍니다. 이해를 돕기위해 도함수 `dw`가 아래와 같다고 가정합니다.
+중간에 `#2` 과정에 해당하는 코드는 이전에 소개해 드렸던 <a href="https://hansololee.github.io/optimization/exponentially_weighted_averages/">지수가중이동평균</a>과 흡사합니다. 지수가중이동평균에서 $$\beta$$ 값에 따라서 그려지는 그래프가 완만해지거나 민감해졌었습니다. Momentum 경사하강법에서도 이와같이 경사하강법의 단계를 부드럽게 만들어줍니다. 이해를 돕기위해 도함수 `dw`가 아래와 같다고 가정합니다.
 
 <br/>
 <center><img data-action="zoom" src='{{ "/assets/img/momentum_02.png" | relative_url }}' alt='absolute'></center>
